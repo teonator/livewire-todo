@@ -19,6 +19,12 @@
                         <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
                     </form>
 
+
+
+                    <div>
+                        @error('task') <span class="text-danger">{{ $message }}</span> @enderror
+                    </div>
+
                     <div class="list-group mt-3">
                         @forelse($tasks as $id => $task)
                             <div class="list-group-item list-group-item-action d-flex align-items-center">

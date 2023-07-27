@@ -11,6 +11,14 @@ class Todo extends Component
 
     public $task = '';
 
+    protected $rules = [
+        'task' => 'required',
+    ];
+
+    protected $messages = [
+        'task.required' => 'Please enter the :attribute.',
+    ];
+
     public function render()
     {
         return view('livewire.todo');
@@ -18,8 +26,10 @@ class Todo extends Component
 
     public function addTask()
     {
+        $this->validate();
+
         $this->tasks[uniqid()] = [
-            'label' => $this->task
+            'label' => $this->task,
         ];
 
         $this->task = '';
