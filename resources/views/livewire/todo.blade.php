@@ -20,9 +20,13 @@
                     </form>
 
                     <div class="list-group mt-3">
-                        @forelse($tasks as $task)
+                        @forelse($tasks as $id => $task)
                             <div class="list-group-item list-group-item-action d-flex align-items-center">
-                                {{ $task[ 'label' ] }}
+                                <p class="flex-grow-1 mb-0 text-secondary">{{ $task[ 'label' ] }}</p>
+
+                                <a wire:click.prevent="deleteTask( '{{ $id }}' )" class="btn btn-sm text-danger">
+                                    <i class="fas fa-trash"></i>
+                                </a>
                             </div>
                         @empty
                             <p class="mt-4 text-center">Hooray! You don't have any pending task.</p>

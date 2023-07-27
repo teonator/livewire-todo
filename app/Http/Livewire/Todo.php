@@ -18,12 +18,16 @@ class Todo extends Component
 
     public function addTask()
     {
-        array_push($this->tasks, [
-            'id'    => uniqid(),
-            'label' => $this->task,
-        ]);
+        $this->tasks[uniqid()] = [
+            'label' => $this->task
+        ];
 
         $this->task = '';
+    }
+
+    public function deleteTask( $taskId )
+    {
+        unset($this->tasks[$taskId]);
     }
 
 }
