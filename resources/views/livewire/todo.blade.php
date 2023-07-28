@@ -19,18 +19,22 @@
                         <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
                     </form>
 
-
-
-                    <div>
-                        @error('task') <span class="text-danger">{{ $message }}</span> @enderror
-                    </div>
+                    @error('task')
+                        <div>
+                             <span class="text-danger">{{ $message }}</span>
+                        </div>
+                    @enderror
 
                     <div class="list-group mt-3">
                         @forelse($tasks as $id => $task)
                             <div class="list-group-item list-group-item-action d-flex align-items-center">
-                                <p class="flex-grow-1 mb-0 text-secondary">{{ $task[ 'label' ] }}</p>
+                                <a wire:click.prevent="editTask('{{ $id }}')" class="btn btn-sm me-2 {{ $task['done'] ? 'btn-outline-success' : 'btn-outline-secondary' }}">
+                                    <i class="fas fa-check {{ $task['done'] ? '' : 'text-white' }}"></i>
+                                </a>
 
-                                <a wire:click.prevent="deleteTask( '{{ $id }}' )" class="btn btn-sm text-danger">
+                                <p class="flex-grow-1 mb-0 text-secondary {{ $task['done'] ? 'text-decoration-line-through' : '' }}">{{ $task['label'] }}</p>
+
+                                <a wire:click.prevent="deleteTask('{{ $id }}')" class="btn btn-sm text-danger">
                                     <i class="fas fa-trash"></i>
                                 </a>
                             </div>

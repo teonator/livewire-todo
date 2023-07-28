@@ -30,9 +30,14 @@ class Todo extends Component
 
         $this->tasks[uniqid()] = [
             'label' => $this->task,
+            'done' => false,
         ];
 
         $this->task = '';
+    }
+
+    public function editTask( $taskId ) {
+        $this->tasks[$taskId]['done'] = !$this->tasks[$taskId]['done'];
     }
 
     public function deleteTask( $taskId )
