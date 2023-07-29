@@ -11,6 +11,8 @@ class Todo extends Component
 
     public $task = '';
 
+    public $filter = '';
+
     protected $rules = [
         'task' => 'required',
     ];
@@ -18,6 +20,22 @@ class Todo extends Component
     protected $messages = [
         'task.required' => 'Please enter the :attribute.',
     ];
+
+    public function getTaskFilterProperty()
+    {
+        return array_filter($this->tasks, function($task) {
+            switch($this->filter) {
+                case 'pending':
+                    return !$task['done'];
+
+                case 'done':
+                    return $task['done'];
+
+                default:
+                    return true;
+            }
+        });
+    }
 
     public function render()
     {
@@ -36,14 +54,18 @@ class Todo extends Component
         $this->reset('task');
     }
 
-    public function editTask( $taskId )
+    public function editTask($taskId)
     {
         $this->tasks[$taskId]['done'] = !$this->tasks[$taskId]['done'];
     }
 
-    public function deleteTask( $taskId )
+    public function deleteTask($taskId)
     {
         unset($this->tasks[$taskId]);
+    }
+
+    public function filterTask($taskFilter) {
+        $this->filter = $taskFilter;
     }
 
 }

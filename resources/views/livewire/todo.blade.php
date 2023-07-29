@@ -25,8 +25,30 @@
                         </div>
                     @enderror
 
+                    <div class="d-flex align-items-center mt-4">
+                        <h4 class="flex-fill m-0">Tasks</h4>
+
+                        <ul class="nav nav-underline flex-fill justify-content-end">
+                            <li class="nav-item">
+                                <a class="nav-link" wire:click.prevent="filterTask( '' )" href="#">
+                                    All
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" wire:click.prevent="filterTask( 'pending' )" href="#">
+                                    Pending
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" wire:click.prevent="filterTask( 'done' )" href="#">
+                                    Done
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
                     <div class="list-group mt-3">
-                        @forelse($tasks as $id => $task)
+                        @forelse($this->taskfilter as $id => $task)
                             <div class="list-group-item list-group-item-action d-flex align-items-center">
                                 <a wire:click.prevent="editTask('{{ $id }}')" class="btn btn-sm me-2 {{ $task['done'] ? 'btn-outline-success' : 'btn-outline-secondary' }}">
                                     <i class="fas fa-check {{ $task['done'] ? '' : 'text-white' }}"></i>
