@@ -13,10 +13,10 @@
             <div class="card">
                 <div class="card-body p-5">
 
-                    <form wire:submit.prevent="addTask" class="d-flex mb-1">
-                        <input wire:model="task" wire:keydown.enter="addTask" type="text" class="form-control me-2" placeholder="New task..." />
+                    <form class="d-flex mb-1">
+                        <input wire:keydown.enter="addTask" wire:model.debounce.1s="task" type="text" class="form-control me-2" placeholder="New task..." />
                         <button type="submit" disabled class="d-none">Prevent form submit from enter</button>
-                        <button class="btn btn-primary"><i class="fas fa-plus"></i></button>
+                        <button wire:click.prevent="addTask" class="btn btn-primary"><i class="fas fa-plus"></i></button>
                     </form>
 
                     @error('task')
