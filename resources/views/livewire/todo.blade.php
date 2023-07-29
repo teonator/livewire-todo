@@ -26,7 +26,7 @@
                     @enderror
 
                     <div class="d-flex align-items-center mt-4">
-                        <h4 class="flex-fill m-0">Tasks</h4>
+                        <h4 class="flex-fill m-0">Tasks ({{$this->taskCount}})</h4>
 
                         <ul class="nav nav-underline flex-fill justify-content-end">
                             <li class="nav-item">

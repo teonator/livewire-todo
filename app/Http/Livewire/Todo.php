@@ -21,7 +21,12 @@ class Todo extends Component
         'task.required' => 'Please enter the :attribute.',
     ];
 
-    public function getTaskFilterProperty()
+    public function getTaskCountProperty($taskFilter = '')
+    {
+        return count( $this->getTaskFilterProperty( $taskFilter ) );
+    }
+
+    public function getTaskFilterProperty($taskFilter = '')
     {
         return array_filter($this->tasks, function($task) {
             switch($this->filter) {
