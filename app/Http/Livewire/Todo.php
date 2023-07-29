@@ -33,10 +33,11 @@ class Todo extends Component
             'done' => false,
         ];
 
-        $this->task = '';
+        $this->reset('task');
     }
 
-    public function editTask( $taskId ) {
+    public function editTask( $taskId )
+    {
         $this->tasks[$taskId]['done'] = !$this->tasks[$taskId]['done'];
     }
 
