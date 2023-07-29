@@ -21,15 +21,10 @@ class Todo extends Component
         'task.required' => 'Please enter the :attribute.',
     ];
 
-    public function getTaskCountProperty($taskFilter = '')
+    public function taskFilter($taskFilter = '')
     {
-        return count( $this->getTaskFilterProperty( $taskFilter ) );
-    }
-
-    public function getTaskFilterProperty($taskFilter = '')
-    {
-        return array_filter($this->tasks, function($task) {
-            switch($this->filter) {
+        return array_filter($this->tasks, function($task) use ($taskFilter) {
+            switch($taskFilter) {
                 case 'pending':
                     return !$task['done'];
 
@@ -40,6 +35,11 @@ class Todo extends Component
                     return true;
             }
         });
+    }
+
+    public function taskCount($taskFilter = '')
+    {
+        return count( $this->taskFilter( $taskFilter ) );
     }
 
     public function render()
