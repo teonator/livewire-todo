@@ -49,17 +49,7 @@
 
                     <div class="list-group mt-3">
                         @forelse($this->taskfilter($filter) as $id => $task)
-                            <div class="list-group-item list-group-item-action d-flex align-items-center">
-                                <a wire:click.prevent="editTask('{{ $id }}')" class="btn btn-sm me-2 {{ $task['done'] ? 'btn-outline-success' : 'btn-outline-secondary' }}">
-                                    <i class="fas fa-check {{ $task['done'] ? '' : 'text-white' }}"></i>
-                                </a>
-
-                                <p class="flex-grow-1 mb-0 text-secondary {{ $task['done'] ? 'text-decoration-line-through' : '' }}">{{ $task['label'] }}</p>
-
-                                <a wire:click.prevent="deleteTask('{{ $id }}')" class="btn btn-sm text-danger">
-                                    <i class="fas fa-trash"></i>
-                                </a>
-                            </div>
+                            <livewire:task :key="$id.now()" :taskId="$id" :taskLabel="$task['label']" :taskDone="$task['done']"   />
                         @empty
                             <p class="mt-4 text-center">Hooray! You don't have any {{ $filter }} task.</p>
                         @endforelse
