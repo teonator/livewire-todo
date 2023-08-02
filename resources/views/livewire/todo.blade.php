@@ -14,16 +14,18 @@
                 <div class="card-body p-5">
 
                     <form class="d-flex mb-1">
-                        <input wire:keydown.enter="addTask" wire:model.lazy="task" type="text" class="form-control me-2" placeholder="New task..." />
+                        <input wire:keydown.enter="addTask" wire:model.lazy="task" type="text" class="form-control me-2 {{ $errors->has('task') ? 'is-invalid' : '' }}" placeholder="New task..." />
                         <button type="submit" disabled class="d-none">Prevent form submit from enter</button>
                         <button wire:click.prevent="addTask" class="btn btn-primary"><i class="fas fa-plus"></i></button>
                     </form>
 
-                    @error('task')
+                    @if ($errors->any())
                         <div>
-                             <span class="text-danger">{{ $message }}</span>
+                            @foreach ($errors->all() as $error)
+                                <span class="text-danger">{{ $error }}</span>
+                            @endforeach
                         </div>
-                    @enderror
+                    @endif
 
                     <div class="d-flex align-items-center mt-4">
                         <h4 class="flex-fill m-0">Tasks</h4>
