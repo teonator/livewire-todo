@@ -29,12 +29,12 @@ class Task extends Component
 
     public function editTask()
     {
-        
+        $this->emitUp('checkTask', $this->taskId);        
     }
 
     public function deleteTask()
     {
-        
+        $this->emitUp('trashTask', $this->taskId);        
     }
 
 }

@@ -21,6 +21,11 @@ class Todo extends Component
         'task.required' => 'Please enter the :attribute.',
     ];
 
+    protected $listeners = [
+        'checkTask' => 'editTask',
+        'trashTask' => 'deleteTask',   
+    ];
+
     public function taskFilter($taskFilter = '')
     {
         return array_filter($this->tasks, function($task) use ($taskFilter) {
