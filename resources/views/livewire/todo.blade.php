@@ -49,13 +49,19 @@
                         </ul>
                     </div>
 
-                    <div class="list-group mt-3">
-                        @forelse($this->taskfilter($filter) as $id => $task)
-                            <livewire:task :key="$id.now()" :taskId="$id" :taskLabel="$task['label']" :taskDone="$task['done']"   />
-                        @empty
-                            <p class="mt-4 text-center">Hooray! You don't have any {{ $filter }} task.</p>
-                        @endforelse
-                    </div>
+                    @forelse($this->taskfilter($filter) as $id => $task)
+                        @if ($loop->first)
+                            <div class="list-group mt-3">
+                        @endif    
+                            
+                        <livewire:task :key="$id.now()" :taskId="$id" :taskLabel="$task['label']" :taskDone="$task['done']"   />
+
+                        @if ($loop->last)
+                            </div>
+                        @endif
+                    @empty
+                        <p class="mt-4 text-center">Hooray! You don't have any {{ $filter }} task.</p>
+                    @endforelse                
 
                 </div>
             </div>
