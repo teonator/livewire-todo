@@ -19,9 +19,9 @@
                         <button wire:click.prevent="addTask" class="btn btn-primary"><i class="fas fa-plus"></i></button>
                     </form>
 
-                    @if ($errors->any())
+                    @if($errors->any())
                         <div>
-                            @foreach ($errors->all() as $error)
+                            @foreach($errors->all() as $error)
                                 <span class="text-danger">{{ $error }}</span>
                             @endforeach
                         </div>
@@ -32,17 +32,17 @@
 
                         <ul class="nav nav-underline flex-fill justify-content-end">
                             <li class="nav-item">
-                                <a class="nav-link" wire:click.prevent="filterTask( '' )" href="#">
+                                <a class="nav-link {{ $filter == '' ? 'active' : '' }}" wire:click.prevent="filterTask( '' )" href="#">
                                     All ({{ $this->taskCount('') }})
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" wire:click.prevent="filterTask( 'pending' )" href="#">
+                                <a class="nav-link {{ $filter == 'pending' ? 'active' : '' }}" wire:click.prevent="filterTask( 'pending' )" href="#">
                                     Pending ({{ $this->taskCount('pending') }})
                                 </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" wire:click.prevent="filterTask( 'done' )" href="#">
+                                <a class="nav-link {{ $filter == 'done' ? 'active' : '' }}" wire:click.prevent="filterTask( 'done' )" href="#">
                                     Done ({{ $this->taskCount('done') }})
                                 </a>
                             </li>
@@ -50,13 +50,13 @@
                     </div>
 
                     @forelse($this->taskfilter($filter) as $id => $task)
-                        @if ($loop->first)
+                        @if($loop->first)
                             <div class="list-group mt-3">
                         @endif    
                             
                         <livewire:task :key="$id.now()" :taskId="$id" :taskLabel="$task['label']" :taskDone="$task['done']"   />
 
-                        @if ($loop->last)
+                        @if($loop->last)
                             </div>
                         @endif
                     @empty
